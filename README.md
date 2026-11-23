@@ -156,8 +156,9 @@ Requirements: JDK 17 (Gradle downloads one automatically if missing) and an inte
 the first time.
 
 ```bash
-./gradlew build              # -> build/libs/sugarplumplushies-1.20.1-1.0.0.jar
+./gradlew build              # -> build/libs/sugarplumplushies-forge-1.20.1-1.0.0.jar
 ./gradlew runClient          # dev client with the mod loaded
+./gradlew runClient -Pshowcase  # builds a showcase world, screenshots it into run/screenshots/ and quits
 ./gradlew runGameTestServer  # headless behaviour tests (6 GameTests)
 ```
 
@@ -191,6 +192,7 @@ src/main/java/com/sugarplumstudios/plushies/
   network/      sync / unlock-toast / claim packets
   client/       renderers (animated BER), particles, book & workshop screens, toast
   gametest/     headless behaviour tests
+  dev/          showcase harness for -Pshowcase (development only, left out of the jar)
 tools/generate_assets.py + tools/assetgen/
   procedural asset pipeline: models, textures, blockstates, recipes, loot, lang
 ```
