@@ -1,6 +1,6 @@
 # Sugarplum Plushies 🧸
 
-*A Sugarplum Studios mod for Minecraft Java 1.20.1 (Forge 47.x)*
+*A Sugarplum Studios mod for Minecraft Java 1.20.1 (Fabric, Forge), 1.21.1, 26.2 and 26.3 (Fabric, NeoForge)*
 
 Fifteen pastel plushies to sew, collect, display, name and cuddle. There are 60 variants in all
 (three colourways plus a rare **Sparkle Edition** per plushie), a Plushie Workshop to sew them in,
@@ -114,8 +114,8 @@ R = Satin Ribbon, ★ = Sugar Star.
 upgrading into. It only takes a named plushie or a Sparkle Edition if nothing else matches.
 
 Rarity scales the cost. Commons need early-game materials, while Rares and the Epic dragon need
-gold, glowstone, lapis, amethyst, phantom membranes or a Sugar Star. Wandering traders sell Sugar
-Stars (5 emeralds), Soft Fabric and the odd plushie. Every price is fixed and shown up front:
+gold, glowstone, lapis, amethyst, phantom membranes or a Sugar Star. On Minecraft 1.20.1 and 1.21.1,
+wandering traders sell Sugar Stars (5 emeralds), Soft Fabric and the odd plushie. Every price is fixed and shown up front:
 **no randomised loot boxes and no real-money mechanics.**
 
 ## Collection system
@@ -144,25 +144,73 @@ There are also advancements: *A New Friend*, *Dear Diary...*, *Sparkle Edition!*
 
 `config/sugarplumplushies-common.toml`: cuddle messages, cuddle particles, cuddle cooldown,
 sneak pick-up, whether name tags are used up, collection rewards, inventory scan interval and
-wandering-trader trades.
+wandering-trader trades (1.20.1 and 1.21.1; 26.x has data-driven trades and gets none from the mod).
 
 `config/sugarplumplushies-client.toml`: idle animations on/off, animation speed, ambient particles,
 when name plates show (`ALWAYS` / `LOOKING` / `NEVER`), display-stand spin and its speed, and
 unlock toasts.
 
-## Building & testing
+## Which jar do I download?
 
-Requirements: JDK 17 (Gradle downloads one automatically if missing) and an internet connection
-the first time.
+Jar names are `sugarplumplushies-{loader}-{minecraft}-{modVersion}.jar`. Match **both** the Minecraft version and
+the loader.
+
+| Minecraft | Java | Fabric jar (needs Fabric API) | NeoForge / Forge jar |
+|-----------|------|-------------------------------|----------------------|
+| 1.20.1 | 17+ | `…-fabric-1.20.1-….jar` | `…-forge-1.20.1-….jar` (Forge 47) |
+| 1.21.1 | 21+ | `…-fabric-1.21.1-….jar` | `…-neoforge-1.21.1-….jar` |
+| 26.2 | 25+ | `…-fabric-26.2-….jar` | `…-neoforge-26.2-….jar` |
+| 26.3 | 25+ | `…-fabric-26.3-….jar` | `…-neoforge-26.3-….jar` |
+
+The mod is needed on both the server and the client.
+
+## Building
+
+Each Minecraft version is a separate MultiLoader Gradle workspace with its own wrapper. These are the only supported
+targets (the NightBeam convention): 8 jars per release, all with the same version.
+
+| Minecraft | Loaders | Java | Folder |
+| --- | --- | --- | --- |
+| 1.20.1 | Forge, Fabric | 17 bytecode (build on 21) | `1.20.1/{common,forge,fabric}` |
+| 1.21.1 | NeoForge, Fabric | 21 | `1.21.1/{common,neoforge,fabric}` |
+| 26.2 | NeoForge, Fabric | 25 | `26.2/{common,neoforge,fabric}` |
+| 26.3 | NeoForge, Fabric | 25 | `26.3/{common,neoforge,fabric}` |
 
 ```bash
-./gradlew build              # -> build/libs/sugarplumplushies-forge-1.20.1-1.0.0.jar
-./gradlew runClient          # dev client with the mod loaded
-./gradlew runClient -Pshowcase  # builds a showcase world, screenshots it into run/screenshots/ and quits
-./gradlew runGameTestServer  # headless behaviour tests (6 GameTests)
+./gradlew buildAll             # every workspace, then the 8 loader jars into releases/
+cd 1.20.1 && ./gradlew build   # Gradle on Java 21 (Java 17 toolchain)
+cd 1.21.1 && ./gradlew build   # Java 21
+cd 26.3 && ./gradlew build     # Java 25 (the same for 26.2)
 ```
 
-### In-game test checklist
+The root build hands the 26.x workspaces `JAVA_HOME_25_X64` (or `-Pjava25Home=<jdk>`) and the others
+`JAVA_HOME_21_X64` (or `-Pjava21Home=<jdk>`); without them each workspace uses the current `JAVA_HOME`.
+Jars land in `<workspace>/<loader>/build/libs/sugarplumplushies-<loader>-<minecraft>-<version>.jar`. Every
+workspace's `gradle.properties` carries the same `version=` (`./gradlew checkVersions`; set it with
+`./gradlew syncVersion -PmodVersion=x.y.z`). `python3 scripts/check_targets.py workspaces` checks the targets, the
+shared version and the metadata ranges.
+
+| Command | What it does |
+|---|---|
+| `python3 tools/generate_assets.py` | Regenerates every model, texture, blockstate, recipe, loot table, tag and the language file in the 1.20.1 workspace. |
+| `python3 tools/port_data.py <1.21.1\|26.2\|26.3>` | Copies the generated resources into another workspace in that version's format (data folder names, item model definitions, pack format, model and loot fields). |
+| `cd 1.20.1 && ./gradlew :forge:runGameTestServer` | Runs the 7 headless behaviour tests and exits (non-zero on failure). |
+| `cd 1.20.1 && ./gradlew :forge:runClient -Pshowcase` | Builds a showcase world, screenshots it into `1.20.1/forge/runs/client/screenshots/` and quits. Development only; it is left out of the jar. |
+| `scripts/server-smoke-test.sh <version> <loader>` | Starts that workspace's dev server and places every block state. |
+
+## Releasing
+
+CI (`.github/workflows/ci.yml`) builds all 8 jars on every push to `main`, runs the GameTests, boots a Forge server
+with the built jar, starts a dev server for every target that places every block state, and launches a 1.20.1 Forge
+client that screenshots the showcase world. Publishing to Modrinth and CurseForge is
+`.github/workflows/publish.yml`, run by hand (`version`, `dry_run`) or by a `v*.*.*` tag; it never runs on a plain
+push. It refuses a second release of the mod on the same day (Africa/Tunis), takes the jars from `releases/`, the
+GitHub Release or a build from source, and fails unless exactly the 8 jars are found. It needs the secrets
+`MODRINTH_TOKEN`, `CURSEFORGE_TOKEN`, `CURSEFORGE_API_KEY` and the variables `MODRINTH_ID`, `CURSEFORGE_ID`; until
+both variables are set it stops before building, dry runs included. `release/1.0.0/` keeps the notes of the
+original Forge-only 1.0.0 build.
+
+## In-game test checklist
 
 1. Make a creative world and open the **Sugarplum Plushies** creative tab. It has every plushie
    variant, all furniture and all materials.
@@ -183,27 +231,38 @@ the first time.
 ## Project layout
 
 ```
-src/main/java/com/sugarplumstudios/plushies/
+<version>/common/src/main/java/com/sugarplumstudios/plushies/
   plushie/      species data, rarities, cuddle and idle animations
   block/        plushie block, display furniture, gift box, workshop, trophy
-  item/         plushie item (variant in BlockStateTag), materials, collection book
+  item/         plushie item (variant in the block state), materials, collection book
   recipe/ menu/ Workshop recipe type and menu
   collection/   per-player collection data, milestones, inventory scanning
-  network/      sync / unlock-toast / claim packets
+  network/      sync / unlock-toast / claim (and, on 26.x, workshop recipe) messages
+  platform/     loader services (registries, networking, creative tab, config folder)
   client/       renderers (animated BER), particles, book & workshop screens, toast
-  gametest/     headless behaviour tests
-  dev/          showcase harness for -Pshowcase (development only, left out of the jar)
+<version>/{fabric,forge,neoforge}/  entry points, events, payload registration, client setup
+1.20.1/forge/.../gametest           headless behaviour tests
+1.20.1/forge/.../dev                showcase harness for -Pshowcase (development only, left out of the jar)
 tools/generate_assets.py + tools/assetgen/
-  procedural asset pipeline: models, textures, blockstates, recipes, loot, lang
+  procedural asset pipeline: models, textures, blockstates, recipes, loot, lang (into the 1.20.1 workspace)
+tools/port_data.py                  copies those resources into the 1.21.1, 26.2 and 26.3 workspaces
 ```
 
-All models, textures and data files are generated by `python tools/generate_assets.py`
-(Python 3, standard library only). To change a plushie's shape, colours, face or animated
+All models, textures and data files are generated by `python3 tools/generate_assets.py`
+(Python 3, standard library only) into the 1.20.1 workspace; `tools/port_data.py` carries them to the others. To change a plushie's shape, colours, face or animated
 parts, edit `tools/assetgen/plushies.py` and run the script again. It rewrites
-`assets/sugarplumplushies` and `data/sugarplumplushies` completely, and keeps the pivots in
+`1.20.1/common/src/main/resources/{assets,data}/sugarplumplushies` completely, and keeps the pivots in
 `plushie_parts.json` in sync with the geometry.
 
 **Rendering approach:** the project started empty, so it doesn't use GeckoLib. Plushies are
 vanilla JSON models drawn by a block-entity renderer, which gives free 16-way rotation, pose-based
 cuddle and idle animations, and separately animated part models for wings, tails, gills, halos and
 the moon. No extra dependency is needed.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Security
+
+See [.github/SECURITY.md](.github/SECURITY.md).

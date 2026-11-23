@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SFS",
+    "WWW"
+  ],
+  "key": {
+    "S": "sugarplumplushies:plush_stuffing",
+    "F": "sugarplumplushies:soft_fabric",
+    "W": "minecraft:magenta_wool"
+  },
+  "result": {
+    "count": 1,
+    "id": "sugarplumplushies:lavender_plushie_bed"
+  }
+}

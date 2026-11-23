@@ -13,7 +13,7 @@ public final class ClientAccess {
     }
 
     public static void openCollectionBook() {
-        Minecraft.getInstance().setScreen(new CollectionBookScreen());
+        Minecraft.getInstance().gui.setScreen(new CollectionBookScreen());
     }
 
     public static void handleSync(int[] masks, int claimed) {

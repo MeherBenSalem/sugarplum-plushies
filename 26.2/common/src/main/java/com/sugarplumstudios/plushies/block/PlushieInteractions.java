@@ -43,9 +43,9 @@ public final class PlushieInteractions {
         }
 
         if (player != null && PlushieConfig.COMMON.interactionMessages.get()) {
-            player.displayClientMessage(Component.translatable(
+            player.sendOverlayMessage(Component.translatable(
                     "message.sugarplumplushies." + species.id() + "." + random.nextInt(MESSAGE_COUNT), name)
-                    .withStyle(style -> style.withColor(0xFFB3D6)), true);
+                    .withStyle(style -> style.withColor(0xFFB3D6)));
         }
     }
 }

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "F",
+    "P",
+    "L"
+  ],
+  "key": {
+    "F": "sugarplumplushies:soft_fabric",
+    "P": "#minecraft:planks",
+    "L": "#minecraft:wooden_slabs"
+  },
+  "result": {
+    "count": 1,
+    "id": "sugarplumplushies:display_stand"
+  }
+}

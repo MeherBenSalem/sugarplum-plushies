@@ -150,7 +150,7 @@ public class PlushieDisplayBlockEntity extends BlockEntity {
     protected void saveAdditional(ValueOutput output) {
         super.saveAdditional(output);
         ContainerHelper.saveAllItems(output, items, true);
-        tag.putBoolean("Spinning", spinning);
+        output.putBoolean("Spinning", spinning);
     }
 
     @Override
@@ -160,7 +160,7 @@ public class PlushieDisplayBlockEntity extends BlockEntity {
             items.set(i, ItemStack.EMPTY);
         }
         ContainerHelper.loadAllItems(input, items);
-        spinning = !tag.contains("Spinning") || tag.getBoolean("Spinning");
+        spinning = input.getBooleanOr("Spinning", true);
     }
 
     @Override

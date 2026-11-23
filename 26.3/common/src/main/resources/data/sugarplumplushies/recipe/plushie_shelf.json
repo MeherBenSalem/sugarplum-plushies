@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "LRL",
+    "S S"
+  ],
+  "key": {
+    "L": "#minecraft:wooden_slabs",
+    "R": "sugarplumplushies:satin_ribbon",
+    "S": "minecraft:stick"
+  },
+  "result": {
+    "count": 2,
+    "id": "sugarplumplushies:plushie_shelf"
+  }
+}

@@ -19,14 +19,14 @@ Both descriptions lead with the pitch, then the plushies, colourways and Sparkle
 ### Modrinth project settings
 
 - **Environment:** required on the client and on the server.
-- **Loader and version:** Forge, Minecraft 1.20.1.
+- **Loaders and versions:** Fabric and Forge for Minecraft 1.20.1; Fabric and NeoForge for 1.21.1, 26.2 and 26.3.
 - **Gallery:** upload `images/screenshots/*.jpg` with the captions used in the CurseForge gallery (the alt texts at the end of `curseforge/description.md`), and `images/banner.png` as the featured image.
 
 ## Adding a Minecraft version
 
 The supported versions are listed in these places:
 
-1. `VERSIONS` at the top of [`source/render.cjs`](source/render.cjs). Add one line, for example `{ minecraft: '1.21.1', loaders: ['NeoForge'] },`. The banner's loader pills and version line are built from it. Then rerun the script for `banner`.
+1. `VERSIONS` at the top of [`source/render.cjs`](source/render.cjs). One line per Minecraft version, for example `{ minecraft: '1.21.1', loaders: ['Fabric', 'NeoForge'] },`. The banner's loader pills and version line are built from it. Then rerun the script for `banner`.
 2. The table under **Downloads & Compatibility** in `curseforge/description.md` and `modrinth/description.md`. Add one row per loader.
 3. The FAQ answer **Is there a Fabric or NeoForge version?** in both files.
 

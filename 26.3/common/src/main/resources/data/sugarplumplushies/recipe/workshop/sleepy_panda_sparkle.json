@@ -1,0 +1,29 @@
+{
+  "type": "sugarplumplushies:plushie_workshop",
+  "ingredients": [
+    {
+      "ingredient": "sugarplumplushies:sleepy_panda",
+      "count": 1
+    },
+    {
+      "ingredient": "sugarplumplushies:sugar_star",
+      "count": 1
+    },
+    {
+      "ingredient": "sugarplumplushies:embroidery_thread",
+      "count": 2
+    },
+    {
+      "ingredient": "minecraft:gold_nugget",
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "sugarplumplushies:sleepy_panda",
+    "components": {
+      "minecraft:block_state": {
+        "variant": "3"
+      }
+    }
+  }
+}

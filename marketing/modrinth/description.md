@@ -152,7 +152,7 @@ A few Workshop patterns (F = Soft Fabric, S = Plush Stuffing, E = Button Eyes, T
 | Moon Cat | 5F 3S 1E 2T 1R, 2 glowstone dust and 2 lapis |
 | Sugarplum Dragon | 6F 4S 1E 3T 1R, a Sugar Star, 2 phantom membranes and 2 amethyst shards |
 
-**Wandering traders** sell a Sugar Star for 5 emeralds, 6 Soft Fabric for 2 emeralds, and now and then a Common or Uncommon plushie for 12 emeralds. Every price is fixed and shown up front: **no random loot boxes and no real-money mechanics.**
+On Minecraft 1.20.1 and 1.21.1, **wandering traders** sell a Sugar Star for 5 emeralds, 6 Soft Fabric for 2 emeralds, and now and then a Common or Uncommon plushie for 12 emeralds. Every price is fixed and shown up front: **no random loot boxes and no real-money mechanics.**
 
 ![Configuration](https://raw.githubusercontent.com/MeherBenSalem/sugarplum-plushies/main/marketing/images/header-config.png)
 
@@ -169,7 +169,7 @@ A few Workshop patterns (F = Soft Fabric, S = Plush Stuffing, E = Button Eyes, T
 | `interactions.consumeNameTags` | `true` | Naming uses up the tag (never in creative) |
 | `collection.collectionRewards` | `true` | Milestone rewards can be claimed |
 | `collection.inventoryScanIntervalTicks` | `20` | How often inventories are checked for new plushies (5–200) |
-| `world.wanderingTraderTrades` | `true` | The wandering trader's plushie trades |
+| `world.wanderingTraderTrades` | `true` | The wandering trader's plushie trades (Minecraft 1.20.1 and 1.21.1) |
 
 `config/sugarplumplushies-client.toml` is set by each player:
 
@@ -196,14 +196,21 @@ A few Workshop patterns (F = Soft Fabric, S = Plush Stuffing, E = Button Eyes, T
 | Minecraft | Loader | Java | Also install |
 | --- | --- | --- | --- |
 | 1.20.1 | Forge 47 or newer | 17+ | Nothing |
+| 1.20.1 | Fabric | 17+ | Fabric API |
+| 1.21.1 | NeoForge | 21+ | Nothing |
+| 1.21.1 | Fabric | 21+ | Fabric API |
+| 26.2 | NeoForge | 25+ | Nothing |
+| 26.2 | Fabric | 25+ | Fabric API |
+| 26.3 | NeoForge | 25+ | Nothing |
+| 26.3 | Fabric | 25+ | Fabric API |
 
-- Install Sugarplum Plushies on **both the server and every client**: it is required on both sides.
+- Install Sugarplum Plushies on **both the server and every client**.
 - Sugarplum Plushies is a mod. It does not work as a Paper, Spigot or Folia plugin.
 
 ![Questions](https://raw.githubusercontent.com/MeherBenSalem/sugarplum-plushies/main/marketing/images/header-faq.png)
 
 **Does it need any other mods?**
-No. Sugarplum Plushies needs only Forge.
+No. On Forge and NeoForge it needs nothing else; on Fabric it needs Fabric API.
 
 **Are there loot boxes or random rewards?**
 No. Every recipe, trade and milestone reward is fixed and shown up front. The only chance involved is which plushie a wandering trader happens to have.
@@ -212,7 +219,7 @@ No. Every recipe, trade and milestone reward is fixed and shown up front. The on
 Sew it in the Workshop: any colourway of that plushie, a Sugar Star, 2 Embroidery Thread and 4 gold nuggets.
 
 **Where do I get Sugar Stars?**
-Craft them from sugar, glowstone dust and amethyst shards, buy them from wandering traders, or earn them from collection milestones.
+Craft them from sugar, glowstone dust and amethyst shards, buy them from wandering traders (Minecraft 1.20.1 and 1.21.1), or earn them from collection milestones.
 
 **Does my collection carry over between worlds?**
 It's saved with your player on each world or server, and it survives death.
@@ -221,11 +228,9 @@ It's saved with your player on each world or server, and it survives death.
 Yes. Turn off `rendering.idleAnimations` in your client config, or slow them down with `rendering.animationSpeed`.
 
 **Is there a Fabric or NeoForge version?**
-Not yet. Sugarplum Plushies runs on Forge for Minecraft 1.20.1.
+Yes. Sugarplum Plushies runs on Fabric and Forge for Minecraft 1.20.1, and on Fabric and NeoForge for Minecraft 1.21.1, 26.2 and 26.3. Pick the file that matches both your Minecraft version and your loader.
 
-![Gallery](https://raw.githubusercontent.com/MeherBenSalem/sugarplum-plushies/main/marketing/images/header-gallery.png)
-
-More screenshots of the bedroom, the lineup, all 60 variants, cuddles, names, the glowing plushies, the furniture, the Collection Book and the Workshop are in this project's **Gallery** tab.
+More screenshots are in this project's **Gallery** tab.
 
 ---
 

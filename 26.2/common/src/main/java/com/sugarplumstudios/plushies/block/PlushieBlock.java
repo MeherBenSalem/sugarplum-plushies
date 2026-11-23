@@ -90,7 +90,7 @@ public class PlushieBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 
     @Override
     public RenderShape getRenderShape(BlockState state) {
-        return RenderShape.ENTITYBLOCK_ANIMATED;
+        return RenderShape.INVISIBLE;
     }
 
     @Override
@@ -189,7 +189,7 @@ public class PlushieBlock extends BaseEntityBlock implements SimpleWaterloggedBl
         int variant = state.getValue(VARIANT);
         ParticleOptions ambient = species.ambientParticle();
         float chance = species.ambientChance();
-        if (species == PlushieSpecies.MOON_CAT && level.isNight()) {
+        if (species == PlushieSpecies.MOON_CAT && level.isDarkOutside()) {
             chance *= 2.0F;
         }
         if (ambient != null && random.nextFloat() < chance) {

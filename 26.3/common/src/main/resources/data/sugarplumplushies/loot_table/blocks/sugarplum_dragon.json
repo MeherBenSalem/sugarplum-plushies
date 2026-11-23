@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "sugarplumplushies:sugarplum_dragon",
+          "modifier": [
+            {
+              "source": "block_entity",
+              "type": "minecraft:copy_name"
+            },
+            {
+              "block": "sugarplumplushies:sugarplum_dragon",
+              "properties": [
+                "variant"
+              ],
+              "type": "minecraft:copy_state"
+            }
+          ]
+        }
+      ],
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      }
+    }
+  ]
+}

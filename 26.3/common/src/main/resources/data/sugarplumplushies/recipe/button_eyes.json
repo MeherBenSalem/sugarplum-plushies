@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:black_dye",
+    "#minecraft:buttons"
+  ],
+  "result": {
+    "count": 4,
+    "id": "sugarplumplushies:button_eyes"
+  }
+}

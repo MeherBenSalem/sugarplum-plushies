@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PRP",
+    "PDP",
+    "PPP"
+  ],
+  "key": {
+    "P": "minecraft:paper",
+    "R": "sugarplumplushies:satin_ribbon",
+    "D": "minecraft:light_blue_dye"
+  },
+  "result": {
+    "count": 1,
+    "id": "sugarplumplushies:sky_plushie_box"
+  }
+}

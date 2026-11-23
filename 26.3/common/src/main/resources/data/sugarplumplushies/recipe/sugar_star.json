@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " A ",
+    "GSG",
+    " A "
+  ],
+  "key": {
+    "A": "minecraft:amethyst_shard",
+    "G": "minecraft:glowstone_dust",
+    "S": "minecraft:sugar"
+  },
+  "result": {
+    "count": 1,
+    "id": "sugarplumplushies:sugar_star"
+  }
+}

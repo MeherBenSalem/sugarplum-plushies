@@ -75,8 +75,8 @@ public final class CollectionEvents {
             }
         }
         player.level().playSound(null, player.blockPosition(), SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundSource.PLAYERS, 0.6F, 1.3F);
-        player.displayClientMessage(Component.translatable("message.sugarplumplushies.reward_claimed", milestone.displayName())
-                .withStyle(style -> style.withColor(0xFFB3D6)), false);
+        player.sendSystemMessage(Component.translatable("message.sugarplumplushies.reward_claimed", milestone.displayName())
+                .withStyle(style -> style.withColor(0xFFB3D6)));
         sync(player);
     }
 

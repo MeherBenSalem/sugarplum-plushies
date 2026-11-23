@@ -16,16 +16,17 @@ Thanks for helping improve Sugarplum Plushies.
 
 Each workspace is a MultiLoader Gradle build:
 
-- `common/`: the decorations (`block/`, `catalog/`), items, the collection book and its tracking, seasons, config,
-  network packets and the client screen. Nearly all changes happen here.
-- `fabric/` and `neoforge/` (`forge/` on 1.20.1): entry points that register content, packets, the creative tab,
-  block tints and events through the `platform/` services. The 1.20.1 Forge module also holds the GameTests and the
-  showcase harness (development only, left out of the jar).
+- `common/`: the plushies (`plushie/`, `block/`, `item/`), the Plushie Workshop recipe and menu, the collection and
+  its milestones, config, network messages and the client renderers, screens, particles and toast. Nearly all
+  changes happen here.
+- `fabric/` and `neoforge/` (`forge/` on 1.20.1): entry points that register content, messages, the creative tab,
+  renderers, models and events through the `platform/` services. The 1.20.1 Forge module also holds the GameTests and
+  the showcase harness (development only, left out of the jar).
 
-## Decorations and assets
+## Models, textures and data
 
-Decorations are defined once, in `tools/clgen/`. Never edit the generated textures, models, blockstates, loot tables,
-recipes, tags, language file or `DecorCatalog.java` by hand:
+Every model, texture, blockstate, recipe, loot table, tag and the language file are generated from
+`tools/assetgen/`. Never edit them by hand:
 
 ```bash
 python3 tools/generate_assets.py     # writes everything into the 1.20.1 workspace and validates it
@@ -39,10 +40,11 @@ python3 tools/port_data.py 26.3
 ```bash
 cd 1.20.1 && ./gradlew :forge:runGameTestServer        # the automated in-game tests
 cd 1.20.1 && ./gradlew :forge:runClient -Pshowcase     # screenshots the showcase world and quits
-scripts/server-smoke-test.sh 26.3 fabric               # a dev server that places every decoration
+scripts/server-smoke-test.sh 26.3 fabric               # a dev server that places every block state
 ```
 
-If you change gameplay, try it on every workspace you touched, for Fabric and NeoForge/Forge.
+If you change gameplay, try it on every workspace you touched, for Fabric and NeoForge/Forge. The README's in-game
+test checklist covers the main features.
 
 ## Coding expectations
 

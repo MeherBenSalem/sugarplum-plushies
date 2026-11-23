@@ -1,5 +1,6 @@
 package com.sugarplumstudios.plushies.plushie;
 
+import net.minecraft.core.particles.PowerParticleOption;
 import com.sugarplumstudios.plushies.registry.ModParticles;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -206,7 +207,7 @@ public enum PlushieSpecies {
     @Nullable
     public ParticleOptions secondaryParticle() {
         return switch (this) {
-            case SUGARPLUM_DRAGON -> ParticleTypes.DRAGON_BREATH;
+            case SUGARPLUM_DRAGON -> PowerParticleOption.create(ParticleTypes.DRAGON_BREATH, 1.0F);
             case ANGEL_BUNNY -> ParticleTypes.END_ROD;
             case HONEY_BEE, STRAWBERRY_COW, CLOUD_PUPPY -> ModParticles.PASTEL_HEART.get();
             case PASTEL_AXOLOTL -> ParticleTypes.SPLASH;

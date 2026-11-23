@@ -67,7 +67,7 @@ public class PlushieWorkshopBlock extends HorizontalDirectionalBlock {
         if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
             // Clients have no recipes, so the patterns go out right before the menu opens.
             ModNetwork.sendTo(serverPlayer, new WorkshopRecipesPacket(
-                    WorkshopRecipe.sorted(serverPlayer.level().getServer().recipeAccess())));
+                    WorkshopRecipe.sorted(serverPlayer.level().getServer().getRecipeManager())));
             player.openMenu(state.getMenuProvider(level, pos));
         }
         return InteractionResult.SUCCESS;

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "sugarplumplushies:block/plushie/sleepy_panda/classic"
+    },
+    "variant=1": {
+      "model": "sugarplumplushies:block/plushie/sleepy_panda/strawberry"
+    },
+    "variant=2": {
+      "model": "sugarplumplushies:block/plushie/sleepy_panda/mint"
+    },
+    "variant=3": {
+      "model": "sugarplumplushies:block/plushie/sleepy_panda/sparkle"
+    }
+  }
+}

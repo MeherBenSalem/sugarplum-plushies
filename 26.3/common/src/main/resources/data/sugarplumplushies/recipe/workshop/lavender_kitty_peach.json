@@ -1,0 +1,37 @@
+{
+  "type": "sugarplumplushies:plushie_workshop",
+  "ingredients": [
+    {
+      "ingredient": "sugarplumplushies:soft_fabric",
+      "count": 3
+    },
+    {
+      "ingredient": "sugarplumplushies:plush_stuffing",
+      "count": 2
+    },
+    {
+      "ingredient": "sugarplumplushies:button_eyes",
+      "count": 1
+    },
+    {
+      "ingredient": "sugarplumplushies:embroidery_thread",
+      "count": 1
+    },
+    {
+      "ingredient": "minecraft:allium",
+      "count": 1
+    },
+    {
+      "ingredient": "minecraft:orange_dye",
+      "count": 1
+    }
+  ],
+  "result": {
+    "id": "sugarplumplushies:lavender_kitty",
+    "components": {
+      "minecraft:block_state": {
+        "variant": "1"
+      }
+    }
+  }
+}

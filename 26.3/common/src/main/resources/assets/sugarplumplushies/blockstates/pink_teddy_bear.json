@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "sugarplumplushies:block/plushie/pink_teddy_bear/pink"
+    },
+    "variant=1": {
+      "model": "sugarplumplushies:block/plushie/pink_teddy_bear/honey"
+    },
+    "variant=2": {
+      "model": "sugarplumplushies:block/plushie/pink_teddy_bear/snow"
+    },
+    "variant=3": {
+      "model": "sugarplumplushies:block/plushie/pink_teddy_bear/sparkle"
+    }
+  }
+}

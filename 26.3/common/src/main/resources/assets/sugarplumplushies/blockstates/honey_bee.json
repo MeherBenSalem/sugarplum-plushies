@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "sugarplumplushies:block/plushie/honey_bee/honey"
+    },
+    "variant=1": {
+      "model": "sugarplumplushies:block/plushie/honey_bee/strawberry"
+    },
+    "variant=2": {
+      "model": "sugarplumplushies:block/plushie/honey_bee/mint"
+    },
+    "variant=3": {
+      "model": "sugarplumplushies:block/plushie/honey_bee/sparkle"
+    }
+  }
+}

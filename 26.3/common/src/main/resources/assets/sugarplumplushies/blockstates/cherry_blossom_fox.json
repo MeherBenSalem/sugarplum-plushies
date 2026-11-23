@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "sugarplumplushies:block/plushie/cherry_blossom_fox/sakura"
+    },
+    "variant=1": {
+      "model": "sugarplumplushies:block/plushie/cherry_blossom_fox/snow"
+    },
+    "variant=2": {
+      "model": "sugarplumplushies:block/plushie/cherry_blossom_fox/twilight"
+    },
+    "variant=3": {
+      "model": "sugarplumplushies:block/plushie/cherry_blossom_fox/sparkle"
+    }
+  }
+}

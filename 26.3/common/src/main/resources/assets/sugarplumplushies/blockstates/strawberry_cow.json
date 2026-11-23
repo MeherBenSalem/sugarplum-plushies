@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "sugarplumplushies:block/plushie/strawberry_cow/strawberry"
+    },
+    "variant=1": {
+      "model": "sugarplumplushies:block/plushie/strawberry_cow/chocolate"
+    },
+    "variant=2": {
+      "model": "sugarplumplushies:block/plushie/strawberry_cow/blueberry"
+    },
+    "variant=3": {
+      "model": "sugarplumplushies:block/plushie/strawberry_cow/sparkle"
+    }
+  }
+}

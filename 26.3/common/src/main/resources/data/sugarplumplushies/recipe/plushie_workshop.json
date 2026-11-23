@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "FIF",
+    "PTP",
+    "PPP"
+  ],
+  "key": {
+    "F": "#minecraft:wool",
+    "I": "minecraft:iron_ingot",
+    "T": "minecraft:crafting_table",
+    "P": "#minecraft:planks"
+  },
+  "result": {
+    "count": 1,
+    "id": "sugarplumplushies:plushie_workshop"
+  }
+}

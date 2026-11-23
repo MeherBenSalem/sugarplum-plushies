@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#minecraft:wool",
+    "minecraft:feather"
+  ],
+  "result": {
+    "count": 4,
+    "id": "sugarplumplushies:plush_stuffing"
+  }
+}

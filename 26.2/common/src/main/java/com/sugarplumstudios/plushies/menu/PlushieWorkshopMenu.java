@@ -38,7 +38,7 @@ public class PlushieWorkshopMenu extends AbstractContainerMenu {
         this.access = access;
         this.player = inventory.player;
         this.recipes = player.level() instanceof ServerLevel server
-                ? WorkshopRecipe.sorted(server.getServer().recipeAccess())
+                ? WorkshopRecipe.sorted(server.getServer().getRecipeManager())
                 : WorkshopRecipe.clientRecipes();
 
         for (int row = 0; row < 3; row++) {

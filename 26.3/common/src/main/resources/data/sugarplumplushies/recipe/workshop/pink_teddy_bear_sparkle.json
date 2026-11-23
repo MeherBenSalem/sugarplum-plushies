@@ -1,0 +1,29 @@
+{
+  "type": "sugarplumplushies:plushie_workshop",
+  "ingredients": [
+    {
+      "ingredient": "sugarplumplushies:pink_teddy_bear",
+      "count": 1
+    },
+    {
+      "ingredient": "sugarplumplushies:sugar_star",
+      "count": 1
+    },
+    {
+      "ingredient": "sugarplumplushies:embroidery_thread",
+      "count": 2
+    },
+    {
+      "ingredient": "minecraft:gold_nugget",
+      "count": 4
+    }
+  ],
+  "result": {
+    "id": "sugarplumplushies:pink_teddy_bear",
+    "components": {
+      "minecraft:block_state": {
+        "variant": "3"
+      }
+    }
+  }
+}
