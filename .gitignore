@@ -1,29 +1,68 @@
-# eclipse
-bin
-*.launch
-.settings
-.metadata
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Eclipse
+.metadata/
+.settings/
 .classpath
 .project
+bin/
 
-# idea
-out
-*.ipr
+# IntelliJ IDEA
+.idea/
 *.iws
 *.iml
-.idea
+*.ipr
+out/
 
-# gradle
-build
-.gradle
+# VS Code / Cursor
+.vscode/
+*.code-workspace
+.cursor/
 
-# other
-eclipse
-run
+# MacOS
+.DS_Store
 
-# Files from Forge MDK
-forge*changelog.txt
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
 
-# python
-__pycache__
+# Logs
+logs/
+*.log
+build_log.txt
+build_output.txt
+dep_warning.txt
+debug.log
+
+# Run folders
+run/
+runs/
+/test/
+
+# Archives / built artifacts (do not commit jars, except the release jars the publish workflow uploads)
+*.jar
+!releases/*.jar
+*.war
+*.zip
+*.tar
+*.tar.gz
+dist/
+
+# Keep the Gradle wrapper jar
+!**/gradle/wrapper/gradle-wrapper.jar
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Temp
+input.txt
+output.txt
+
+# Python
 __pycache__/
