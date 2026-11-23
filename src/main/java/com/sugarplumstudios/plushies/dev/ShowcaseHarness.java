@@ -68,6 +68,8 @@ public final class ShowcaseHarness {
     private static final int FACE_SOUTH = 8;
     private static final int SHOT_TICKS = 80;
     private static final int TRIGGER_AT = 70;
+    private static final double EYE_HEIGHT = 1.62;
+    private static final int FOV = 55;
     private static final PlushieSpecies[] ALL = PlushieSpecies.values();
 
     /**
@@ -79,6 +81,20 @@ public final class ShowcaseHarness {
                         @Nullable Runnable after) {
         Shot(String name, double x, double y, double z, float yaw, float pitch) {
             this(name, x, y, z, yaw, pitch, null, null, null);
+        }
+
+        /** A camera whose eye is at (ex, ey, ez), looking at (tx, ty, tz). */
+        static Shot look(String name, double ex, double ey, double ez, double tx, double ty, double tz,
+                         @Nullable Consumer<ServerLevel> setup, @Nullable Consumer<ServerLevel> trigger, @Nullable Runnable after) {
+            double dx = tx - ex;
+            double dz = tz - ez;
+            float yaw = (float) Math.toDegrees(Math.atan2(-dx, dz));
+            float pitch = (float) -Math.toDegrees(Math.atan2(ty - ey, Math.sqrt(dx * dx + dz * dz)));
+            return new Shot(name, ex, ey - EYE_HEIGHT, ez, yaw, pitch, setup, trigger, after);
+        }
+
+        static Shot look(String name, double ex, double ey, double ez, double tx, double ty, double tz) {
+            return look(name, ex, ey, ez, tx, ty, tz, null, null, null);
         }
     }
 
@@ -96,6 +112,7 @@ public final class ShowcaseHarness {
         worldRequested = true;
         mc.getWindow().setWindowed(WIDTH, HEIGHT);
         mc.options.hideGui = true;
+        mc.options.fov().set(FOV);
         LevelSettings settings = new LevelSettings("Plushie Showcase", GameType.CREATIVE, false, Difficulty.PEACEFUL, true,
                 new GameRules(), WorldDataConfiguration.DEFAULT);
         mc.createWorldOpenFlows().createFreshLevel("plushie_showcase_" + System.currentTimeMillis(), settings,
@@ -154,11 +171,17 @@ public final class ShowcaseHarness {
                 if (shot.setup != null) {
                     server.execute(() -> shot.setup.accept(server.overworld()));
                 }
+                server.execute(() -> clearMobs(server.overworld()));
                 mc.player.getAbilities().flying = true;
                 mc.player.moveTo(shot.x, shot.y, shot.z, shot.yaw, shot.pitch);
                 mc.player.setDeltaMovement(0, 0, 0);
-            } else if (step == TRIGGER_AT && shot.trigger != null) {
-                server.execute(() -> shot.trigger.accept(server.overworld()));
+            } else if (step == TRIGGER_AT) {
+                server.execute(() -> {
+                    clearMobs(server.overworld());
+                    if (shot.trigger != null) {
+                        shot.trigger.accept(server.overworld());
+                    }
+                });
             } else if (step == SHOT_TICKS - 1) {
                 grab(mc, shot.name);
                 if (shot.after != null) {
@@ -172,6 +195,34 @@ public final class ShowcaseHarness {
     }
 
     // ------------------------------------------------------------------ screens
+
+    /**
+     * Moves the mouse into the window's top-left corner so no tooltip shows. Under Xvfb GLFW's
+     * cursor callback doesn't fire, so the handler's own position is set (dev mappings only).
+     */
+    private static void parkMouse(Minecraft mc) {
+        GLFW.glfwSetCursorPos(mc.getWindow().getWindow(), 2, 2);
+        try {
+            for (String name : new String[]{"xpos", "ypos"}) {
+                java.lang.reflect.Field field = net.minecraft.client.MouseHandler.class.getDeclaredField(name);
+                field.setAccessible(true);
+                field.setDouble(mc.mouseHandler, 2);
+            }
+        } catch (ReflectiveOperationException ignored) {
+            // the tooltip shows; the screenshot is still usable
+        }
+    }
+
+    /** Removes the animals a flat world spawns, so none wander into a shot. */
+    private static void clearMobs(ServerLevel level) {
+        List<net.minecraft.world.entity.Entity> mobs = new ArrayList<>();
+        for (net.minecraft.world.entity.Entity entity : level.getAllEntities()) {
+            if (!(entity instanceof net.minecraft.world.entity.player.Player)) {
+                mobs.add(entity);
+            }
+        }
+        mobs.forEach(net.minecraft.world.entity.Entity::discard);
+    }
 
     private static void click(Minecraft mc, double x, double y) {
         if (mc.screen != null) {
@@ -189,7 +240,14 @@ public final class ShowcaseHarness {
         }
         switch (guiStage) {
             case 1 -> {
-                server.execute(() -> server.overworld().setDayTime(6000));
+                parkMouse(mc);
+                server.execute(() -> {
+                    server.overworld().setDayTime(6000);
+                    ServerPlayer player = serverPlayer(server);
+                    if (player != null) {
+                        player.setGameMode(GameType.CREATIVE);
+                    }
+                });
                 GLFW.glfwSetCursorPos(mc.getWindow().getWindow(), 2, 2);
                 mc.getToasts().clear();
                 mc.setScreen(new CollectionBookScreen());
@@ -225,6 +283,7 @@ public final class ShowcaseHarness {
                     click(mc, left + 10 + 9, top + 20 + 4 * 18 + 9);
                 }
                 ClientAccess.handleUnlock(PlushieSpecies.ANGEL_BUNNY.ordinal(), 0);
+                parkMouse(mc);
             }
             case 95 -> grab(mc, "workshop");
             case 110 -> mc.stop();
@@ -338,6 +397,13 @@ public final class ShowcaseHarness {
         level.setDayTime(6000);
         level.setWeatherParameters(6000, 0, false, false);
         level.getGameRules().getRule(GameRules.RULE_DAYLIGHT).set(false, level.getServer());
+        level.getGameRules().getRule(GameRules.RULE_DOMOBSPAWNING).set(false, level.getServer());
+        clearMobs(level);
+        ServerPlayer viewer = serverPlayer(level.getServer());
+        if (viewer != null) {
+            // spectators pass through blocks, so the camera can sit low
+            viewer.setGameMode(GameType.SPECTATOR);
+        }
         lineup(level);
         colourways(level);
         bedroom(level);
@@ -358,20 +424,20 @@ public final class ShowcaseHarness {
         for (int i = 8; i < 15; i++) {
             plushie(level, (i - 8) * 2 + 1, Y, 1, ALL[i], 0, FACE_SOUTH);
         }
-        SHOTS.add(new Shot("lineup", 7.5, Y + 1.7, 7.2, 180, 10));
+        SHOTS.add(Shot.look("lineup", 7.5, Y + 2.4, 9.8, 7.5, Y + 0.7, 0.8));
     }
 
     /** All sixty variants: one column per plushie, one row per colourway, Sparkle Editions in front. */
     private static void colourways(ServerLevel level) {
         int x0 = 24;
         fill(level, x0 - 2, Y - 1, -2, x0 + 16, Y - 1, 6, Blocks.WHITE_CONCRETE);
-        fill(level, x0 - 2, Y, -2, x0 + 16, Y + 3, -2, Blocks.LIGHT_BLUE_WOOL);
+        fill(level, x0 - 2, Y, -2, x0 + 16, Y + 3, -2, Blocks.PINK_WOOL);
         for (int s = 0; s < ALL.length; s++) {
             for (int v = 0; v < PlushieSpecies.VARIANT_COUNT; v++) {
                 plushie(level, x0 + s, Y, v, ALL[s], v, FACE_SOUTH);
             }
         }
-        SHOTS.add(new Shot("colourways", x0 + 7.5, Y + 4.6, 10.2, 180, 30));
+        SHOTS.add(Shot.look("colourways", x0 + 7.5, Y + 4.4, 11.0, x0 + 7.5, Y + 0.3, 2.0));
     }
 
     /** A pastel bedroom with every kind of furniture in use. */
@@ -415,8 +481,8 @@ public final class ShowcaseHarness {
         box(level, x0 + 9, Y + 1, 1, PastelColor.SKY, Direction.WEST);
         box(level, x0 + 9, Y, 3, PastelColor.LAVENDER, Direction.WEST);
         facing(level, x0 + 7, Y, 0, ModBlocks.PLUSHIE_WORKSHOP.get(), Direction.SOUTH);
-        SHOTS.add(new Shot("bedroom", x0 + 10.2, Y + 2.5, 9.4, 135, 22));
-        SHOTS.add(new Shot("bedroom_closeup", x0 + 6.6, Y + 1.7, 6.9, 150, 20));
+        SHOTS.add(Shot.look("bedroom", x0 + 9.4, Y + 3.0, 8.4, x0 + 3.2, Y + 0.9, 2.0));
+        SHOTS.add(Shot.look("bedroom_closeup", x0 + 7.0, Y + 1.9, 5.8, x0 + 2.6, Y + 0.7, 2.0));
     }
 
     /** Three plushies caught mid-cuddle: petals, a shower of hearts and music notes. */
@@ -429,7 +495,7 @@ public final class ShowcaseHarness {
         BlockPos fox = plushie(level, x0, Y, 1, PlushieSpecies.CHERRY_BLOSSOM_FOX, 0, 7);
         BlockPos bear = plushie(level, x0 + 1, Y, 1, PlushieSpecies.HEART_BEAR, 0, FACE_SOUTH);
         BlockPos duck = plushie(level, x0 + 2, Y, 1, PlushieSpecies.LITTLE_DUCK, 0, 9);
-        SHOTS.add(new Shot("cuddle", x0 + 1.5, Y + 1.15, 3.7, 180, 14, null, l -> {
+        SHOTS.add(Shot.look("cuddle", x0 + 1.5, Y + 1.0, 4.3, x0 + 1.5, Y + 0.5, 1.5, null, l -> {
             cuddle(l, fox);
             cuddle(l, bear);
             cuddle(l, duck);
@@ -443,7 +509,7 @@ public final class ShowcaseHarness {
         named(level, plushie(level, x0, Y, 1, PlushieSpecies.PINK_TEDDY_BEAR, 0, 7), "Mochi");
         named(level, plushie(level, x0 + 1, Y, 1, PlushieSpecies.CLOUD_PUPPY, 1, FACE_SOUTH), "Biscuit");
         named(level, plushie(level, x0 + 2, Y, 1, PlushieSpecies.STRAWBERRY_BUNNY, 0, 9), "Princess Puff");
-        SHOTS.add(new Shot("names", x0 + 1.5, Y + 1.25, 3.9, 180, 12,
+        SHOTS.add(Shot.look("names", x0 + 1.5, Y + 1.05, 4.5, x0 + 1.5, Y + 0.7, 1.5,
                 l -> PlushieConfig.CLIENT.nameplates.set(PlushieConfig.NameplateMode.ALWAYS), null,
                 () -> PlushieConfig.CLIENT.nameplates.set(PlushieConfig.NameplateMode.LOOKING)));
     }
@@ -470,22 +536,25 @@ public final class ShowcaseHarness {
         facing(level, x0 + 11, Y, 0, ModBlocks.GOLDEN_COLLECTOR_TROPHY.get(), Direction.SOUTH);
         facing(level, x0 + 12, Y, 0, ModBlocks.RAINBOW_COLLECTOR_TROPHY.get(), Direction.SOUTH);
         facing(level, WORKSHOP_X, Y, 0, ModBlocks.PLUSHIE_WORKSHOP.get(), Direction.SOUTH);
-        SHOTS.add(new Shot("furniture", x0 + 6.5, Y + 1.9, 6.4, 180, 12));
+        SHOTS.add(Shot.look("furniture", x0 + 7.0, Y + 2.4, 8.8, x0 + 7.0, Y + 0.6, 0.5));
     }
 
     /** At night: the glowing Moon Cat and Angel Bunny with Sparkle Editions around them. */
     private static void night(ServerLevel level) {
         int x0 = 120;
-        block(level, x0 - 2, Y, 0, Blocks.LILY_OF_THE_VALLEY);
-        block(level, x0 + 5, Y, 1, Blocks.AZURE_BLUET);
+        block(level, x0 - 1, Y, 2, Blocks.LILY_OF_THE_VALLEY);
+        block(level, x0 + 5, Y, 2, Blocks.AZURE_BLUET);
+        facing(level, x0 - 1, Y, 0, ModBlocks.GOLDEN_COLLECTOR_TROPHY.get(), Direction.SOUTH);
+        facing(level, x0 + 5, Y, 0, ModBlocks.RAINBOW_COLLECTOR_TROPHY.get(), Direction.SOUTH);
+        plushie(level, x0 + 1, Y, 2, PlushieSpecies.ANGEL_BUNNY, PlushieSpecies.SPARKLE, FACE_SOUTH);
         plushie(level, x0, Y, 1, PlushieSpecies.HEART_BEAR, PlushieSpecies.SPARKLE, 7);
         plushie(level, x0 + 1, Y, 0, PlushieSpecies.ANGEL_BUNNY, 0, 7);
         plushie(level, x0 + 2, Y, 0, PlushieSpecies.MOON_CAT, 0, FACE_SOUTH);
         plushie(level, x0 + 3, Y, 0, PlushieSpecies.SUGARPLUM_DRAGON, PlushieSpecies.SPARKLE, 9);
         plushie(level, x0 + 4, Y, 1, PlushieSpecies.PINK_TEDDY_BEAR, PlushieSpecies.SPARKLE, 9);
         plushie(level, x0 + 2, Y, 2, PlushieSpecies.MOON_CAT, 2, FACE_SOUTH);
-        SHOTS.add(new Shot("night", x0 + 2.5, Y + 1.35, 4.6, 180, 12, l -> {
-            l.setDayTime(18000);
+        SHOTS.add(Shot.look("night", x0 + 2.5, Y + 1.3, 5.6, x0 + 2.5, Y + 0.5, 1.0, l -> {
+            l.setDayTime(14200);
             Minecraft.getInstance().execute(() -> Minecraft.getInstance().options.gamma().set(1.0D));
         }, null, () -> Minecraft.getInstance().options.gamma().set(0.5D)));
     }
