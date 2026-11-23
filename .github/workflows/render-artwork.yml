@@ -1,0 +1,22 @@
+# Temporary: renders marketing/images with marketing/source/render.cjs and commits them to this branch,
+# so they can be fetched with git. This branch is deleted once the images are copied into marketing-assets.
+name: Render artwork
+on:
+  push:
+    branches: [scratch/render-artwork]
+permissions:
+  contents: write
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm install -g playwright@1.48.2 && npx -y playwright@1.48.2 install --with-deps chromium && sudo apt-get install -y fonts-dejavu-core
+      - run: NODE_PATH="$(npm root -g)" node marketing/source/render.cjs
+      - run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add marketing/images && git commit -m "Rendered artwork" && git push
