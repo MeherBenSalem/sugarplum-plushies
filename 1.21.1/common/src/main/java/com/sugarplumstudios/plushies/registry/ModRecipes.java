@@ -12,7 +12,12 @@ import net.minecraft.world.item.crafting.RecipeType;
 public final class ModRecipes {
 
     public static final RegistryEntry<RecipeType<WorkshopRecipe>> WORKSHOP = Services.PLATFORM.register(Registries.RECIPE_TYPE, "plushie_workshop",
-            () -> RecipeType.simple(SugarplumPlushies.id("plushie_workshop")));
+            () -> new RecipeType<>() {
+                @Override
+                public String toString() {
+                    return SugarplumPlushies.id("plushie_workshop").toString();
+                }
+            });
 
     public static final RegistryEntry<RecipeSerializer<WorkshopRecipe>> WORKSHOP_SERIALIZER = Services.PLATFORM.register(Registries.RECIPE_SERIALIZER, "plushie_workshop",
             WorkshopRecipe.Serializer::new);

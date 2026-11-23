@@ -69,7 +69,7 @@ public class PlushieWorkshopMenu extends AbstractContainerMenu {
         int crafted = 0;
         while (crafted < limit && recipe.canCraft(inventory)) {
             recipe.consume(inventory);
-            ItemStack result = recipe.assemble(inventory, player.level().registryAccess());
+            ItemStack result = recipe.assemble(new WorkshopRecipe.ContainerInput(inventory), player.level().registryAccess());
             if (!inventory.add(result)) {
                 player.drop(result, false);
             }
