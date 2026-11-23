@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "sugarplumplushies:block/plushie/little_duck/sunny"
+    },
+    "variant=1": {
+      "model": "sugarplumplushies:block/plushie/little_duck/cream"
+    },
+    "variant=2": {
+      "model": "sugarplumplushies:block/plushie/little_duck/mint"
+    },
+    "variant=3": {
+      "model": "sugarplumplushies:block/plushie/little_duck/sparkle"
+    }
+  }
+}

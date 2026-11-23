@@ -1,0 +1,33 @@
+{
+  "type": "sugarplumplushies:plushie_workshop",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "sugarplumplushies:little_duck"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "sugarplumplushies:sugar_star"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "sugarplumplushies:embroidery_thread"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:gold_nugget"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "item": "sugarplumplushies:little_duck",
+    "nbt": "{BlockStateTag:{variant:\"3\"}}"
+  }
+}

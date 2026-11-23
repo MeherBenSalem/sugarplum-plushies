@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "sugarplumplushies:sugarplum_dragon"
+    },
+    "title": {
+      "translate": "advancements.sugarplumplushies.sugarplum_dragon.title"
+    },
+    "description": {
+      "translate": "advancements.sugarplumplushies.sugarplum_dragon.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "dragon": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "sugarplumplushies:sugarplum_dragon"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "sugarplumplushies:first_plushie"
+}

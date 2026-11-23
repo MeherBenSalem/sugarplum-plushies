@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "sugarplumplushies:block/plushie/lavender_kitty/lavender"
+    },
+    "variant=1": {
+      "model": "sugarplumplushies:block/plushie/lavender_kitty/peach"
+    },
+    "variant=2": {
+      "model": "sugarplumplushies:block/plushie/lavender_kitty/midnight"
+    },
+    "variant=3": {
+      "model": "sugarplumplushies:block/plushie/lavender_kitty/sparkle"
+    }
+  }
+}

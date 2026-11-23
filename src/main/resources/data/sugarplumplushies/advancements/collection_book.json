@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "sugarplumplushies:plushie_collection_book"
+    },
+    "title": {
+      "translate": "advancements.sugarplumplushies.collection_book.title"
+    },
+    "description": {
+      "translate": "advancements.sugarplumplushies.collection_book.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "sugarplumplushies:plushie_collection_book"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "sugarplumplushies:first_plushie"
+}

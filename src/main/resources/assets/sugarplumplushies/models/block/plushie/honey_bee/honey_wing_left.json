@@ -1,0 +1,78 @@
+{
+  "ambientocclusion": false,
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "t": "sugarplumplushies:block/plushie/honey_bee/honey",
+    "particle": "sugarplumplushies:block/plushie/honey_bee/honey"
+  },
+  "elements": [
+    {
+      "from": [
+        1.5,
+        7.5,
+        7.75
+      ],
+      "to": [
+        6.0,
+        11.5,
+        8.25
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            6.25,
+            7.75,
+            10.75,
+            11.75
+          ],
+          "texture": "#t"
+        },
+        "south": {
+          "uv": [
+            6.25,
+            7.75,
+            10.75,
+            11.75
+          ],
+          "texture": "#t"
+        },
+        "east": {
+          "uv": [
+            6.25,
+            7.75,
+            6.75,
+            11.75
+          ],
+          "texture": "#t"
+        },
+        "west": {
+          "uv": [
+            6.25,
+            7.75,
+            6.75,
+            11.75
+          ],
+          "texture": "#t"
+        },
+        "up": {
+          "uv": [
+            6.25,
+            7.75,
+            10.75,
+            8.25
+          ],
+          "texture": "#t"
+        },
+        "down": {
+          "uv": [
+            6.25,
+            7.75,
+            10.75,
+            8.25
+          ],
+          "texture": "#t"
+        }
+      }
+    }
+  ]
+}

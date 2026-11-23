@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "sugarplumplushies:block/plushie_workshop"
+    },
+    "facing=east": {
+      "model": "sugarplumplushies:block/plushie_workshop",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "sugarplumplushies:block/plushie_workshop",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "sugarplumplushies:block/plushie_workshop",
+      "y": 270
+    }
+  }
+}

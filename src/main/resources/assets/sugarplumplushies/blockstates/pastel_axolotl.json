@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "sugarplumplushies:block/plushie/pastel_axolotl/blossom"
+    },
+    "variant=1": {
+      "model": "sugarplumplushies:block/plushie/pastel_axolotl/mint"
+    },
+    "variant=2": {
+      "model": "sugarplumplushies:block/plushie/pastel_axolotl/lavender"
+    },
+    "variant=3": {
+      "model": "sugarplumplushies:block/plushie/pastel_axolotl/sparkle"
+    }
+  }
+}

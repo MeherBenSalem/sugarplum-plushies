@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "sugarplumplushies:block/rainbow_collector_trophy"
+    },
+    "facing=east": {
+      "model": "sugarplumplushies:block/rainbow_collector_trophy",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "sugarplumplushies:block/rainbow_collector_trophy",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "sugarplumplushies:block/rainbow_collector_trophy",
+      "y": 270
+    }
+  }
+}
