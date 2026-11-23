@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Derives a newer Minecraft version's common resources from the 1.20.1 ones.
 
-tools/generate_assets.py writes 1.20.1/common/src/main/resources and the generated DecorCatalog.java. This script
-copies both into another workspace and rewrites the data (and, from 1.21.4 on, adds item model definitions) in that
-version's formats:
+1.20.1/common/src/main/resources holds the hand-made and tools/generate_assets.py resources. This script copies them
+into another workspace and rewrites the data (and, from 1.21.4 on, adds item model definitions) in that version's
+formats:
 
     python3 tools/port_data.py 1.21.1
     python3 tools/port_data.py 26.2
@@ -19,10 +19,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE = ROOT / "1.20.1" / "common" / "src" / "main" / "resources"
 MODID = "sugarplumplushies"
-# The generated decoration catalog is plain data and is the same on every version.
-CATALOG = Path("com") / "sugarplumstudios" / "cottagecore" / "catalog" / "DecorCatalog.java"
-# Item models of the water-tinted decorations (fountains, birdbaths) get the default water colour (0x3F76E4).
-WATER_TINT = -12618012
+import re
+
+PLUSHIE_VARIANT_NBT = re.compile(r'^\{BlockStateTag:\{variant:"(\d)"\}\}$')
 
 # (pack_format, min, max) for the mod's pack.mcmeta; 26.x uses a min/max format range only.
 PACK = {"1.21.1": (34, 34, 48), "26.2": (None, 88, 107), "26.3": (None, 97, 121)}
@@ -57,12 +56,24 @@ def ingredient_26(ing):
     return ing
 
 
+def variant_components(nbt):
+    """A plushie's 1.20.1 BlockStateTag nbt becomes the minecraft:block_state component."""
+    match = PLUSHIE_VARIANT_NBT.match(nbt)
+    if not match:
+        raise SystemExit(f"unsupported nbt {nbt!r}")
+    return {"minecraft:block_state": {"variant": match.group(1)}}
+
+
 def recipe(obj, version):
     if "result" in obj and isinstance(obj["result"], dict) and "item" in obj["result"]:
         obj["result"]["id"] = obj["result"].pop("item")
+        if "nbt" in obj["result"]:
+            obj["result"]["components"] = variant_components(obj["result"].pop("nbt"))
     if is_26(version):
         if "ingredients" in obj:
-            obj["ingredients"] = [ingredient_26(i) for i in obj["ingredients"]]
+            # Workshop recipes nest each ingredient as {"ingredient": ..., "count": n}.
+            obj["ingredients"] = [dict(i, ingredient=ingredient_26(i["ingredient"])) if isinstance(i, dict) and "ingredient" in i
+                                  else ingredient_26(i) for i in obj["ingredients"]]
         if "key" in obj:
             obj["key"] = {k: ingredient_26(v) for k, v in obj["key"].items()}
     return obj
@@ -119,30 +130,59 @@ def loot_table(obj, version):
     return obj
 
 
+# ----------------------------------------------------------------------- advancements
+
+def item_predicate(pred):
+    """1.21: "tag" became "items": "#tag", and the plushie variant nbt became a component match."""
+    pred = dict(pred)
+    if "tag" in pred:
+        pred["items"] = "#" + pred.pop("tag")
+    if "nbt" in pred:
+        pred["components"] = variant_components(pred.pop("nbt"))
+    return pred
+
+
+def advancement(obj, version):
+    display = obj.get("display")
+    if display:
+        icon = display.get("icon")
+        if icon and "item" in icon:
+            icon["id"] = icon.pop("item")
+        bg = display.get("background")
+        if bg and is_26(version):
+            # 1.21.5+: the background is a texture id without the textures/ prefix and .png suffix.
+            ns, path = bg.split(":", 1)
+            display["background"] = ns + ":" + path.removeprefix("textures/").removesuffix(".png")
+    for crit in obj.get("criteria", {}).values():
+        items = crit.get("conditions", {}).get("items")
+        if items:
+            crit["conditions"]["items"] = [item_predicate(p) for p in items]
+    return obj
+
+
 # ----------------------------------------------------------------------- item model definitions (1.21.4+)
 
-def tinted(assets, model_path):
-    """True when an item model (or the block model it inherits from) has a tinted face."""
-    seen = set()
-    path = model_path
-    while path is not None and path not in seen and path.exists():
-        seen.add(path)
-        text = path.read_text(encoding="utf-8")
-        if '"tintindex"' in text:
-            return True
-        parent = json.loads(text).get("parent", "")
-        if not parent.startswith(MODID + ":"):
-            return False
-        path = assets / "models" / (parent.split(":", 1)[1] + ".json")
-    return False
-
-
 def item_definitions(assets):
-    """1.21.4+: every item needs assets/<ns>/items/<id>.json pointing at its model (tints are declared there too)."""
+    """1.21.4+: every item needs assets/<ns>/items/<id>.json. A plushie item (its model has "overrides" on the
+    sugarplumplushies:variant property) selects its variant model from the minecraft:block_state component."""
     for model in sorted((assets / "models" / "item").glob("*.json")):
-        definition = {"type": "minecraft:model", "model": f"{MODID}:item/{model.stem}"}
-        if tinted(assets, model):
-            definition["tints"] = [{"type": "minecraft:constant", "value": WATER_TINT}]
+        obj = load(model)
+        base = {"type": "minecraft:model", "model": f"{MODID}:item/{model.stem}"}
+        overrides = obj.get("overrides")
+        if overrides:
+            cases = []
+            for o in overrides:
+                v = o.get("predicate", {}).get(f"{MODID}:variant")
+                if v is None:
+                    continue
+                variant = str(int(v))
+                cases.append({"when": variant, "model": {"type": "minecraft:model", "model": o["model"]}})
+            definition = {"type": "minecraft:select", "property": "minecraft:block_state",
+                          "block_state_property": "variant", "cases": cases, "fallback": base}
+            obj.pop("overrides")
+            dump(model, obj)
+        else:
+            definition = base
         dump(assets / "items" / model.name, {"model": definition})
 
 
@@ -173,8 +213,6 @@ def port(version):
         shutil.rmtree(target / sub, ignore_errors=True)
         shutil.copytree(SOURCE / sub, target / sub)
     shutil.copy2(SOURCE / f"{MODID}_logo.png", target / f"{MODID}_logo.png")
-    java = ROOT / version / "common" / "src" / "main" / "java" / CATALOG
-    shutil.copy2(SOURCE.parent / "java" / CATALOG, java)
 
     for ns_dir in (target / "data").iterdir():
         for old, new in RENAMED.items():
@@ -191,6 +229,8 @@ def port(version):
         dump(path, recipe(load(path), version))
     for path in data.glob("*/loot_table/**/*.json"):
         dump(path, loot_table(load(path), version))
+    for path in data.glob("*/advancement/**/*.json"):
+        dump(path, advancement(load(path), version))
 
     if is_26(version):
         item_definitions(target / "assets" / MODID)

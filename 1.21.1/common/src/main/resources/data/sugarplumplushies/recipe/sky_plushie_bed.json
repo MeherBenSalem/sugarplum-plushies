@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SFS",
+    "WWW"
+  ],
+  "key": {
+    "S": {
+      "item": "sugarplumplushies:plush_stuffing"
+    },
+    "F": {
+      "item": "sugarplumplushies:soft_fabric"
+    },
+    "W": {
+      "item": "minecraft:light_blue_wool"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "sugarplumplushies:sky_plushie_bed"
+  }
+}

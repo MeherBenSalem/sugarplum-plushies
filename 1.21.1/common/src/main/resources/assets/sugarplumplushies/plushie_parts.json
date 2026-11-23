@@ -1,0 +1,193 @@
+{
+  "strawberry_bunny": [],
+  "pink_teddy_bear": [],
+  "lavender_kitty": [
+    {
+      "name": "tail",
+      "pivot": [
+        8,
+        1,
+        10.5
+      ],
+      "axis": "y",
+      "amplitude": 12,
+      "speed": 0.07,
+      "boost": 2.5
+    }
+  ],
+  "cloud_puppy": [
+    {
+      "name": "tail",
+      "pivot": [
+        8,
+        3.5,
+        11
+      ],
+      "axis": "y",
+      "amplitude": 24,
+      "speed": 0.3,
+      "boost": 1.5
+    }
+  ],
+  "cherry_blossom_fox": [
+    {
+      "name": "tail",
+      "pivot": [
+        8,
+        1.5,
+        10.5
+      ],
+      "axis": "y",
+      "amplitude": 14,
+      "speed": 0.08,
+      "boost": 2.0
+    }
+  ],
+  "angel_bunny": [
+    {
+      "name": "wing_left",
+      "pivot": [
+        6,
+        6.75,
+        10.75
+      ],
+      "axis": "y",
+      "amplitude": 18,
+      "speed": 0.12,
+      "boost": 2.5
+    },
+    {
+      "name": "wing_right",
+      "pivot": [
+        10,
+        6.75,
+        10.75
+      ],
+      "axis": "y",
+      "amplitude": -18,
+      "speed": 0.12,
+      "boost": 2.5
+    },
+    {
+      "name": "halo",
+      "pivot": [
+        8,
+        12.5,
+        8
+      ],
+      "bob_amplitude": 0.6,
+      "bob_speed": 0.1,
+      "spin": 1.2
+    }
+  ],
+  "sleepy_panda": [],
+  "heart_bear": [],
+  "little_duck": [],
+  "moon_cat": [
+    {
+      "name": "moon",
+      "pivot": [
+        8,
+        10,
+        8
+      ],
+      "spin": 1.5,
+      "bob_amplitude": 0.7,
+      "bob_speed": 0.08
+    }
+  ],
+  "sugarplum_dragon": [
+    {
+      "name": "wing_left",
+      "pivot": [
+        5,
+        8,
+        11
+      ],
+      "axis": "y",
+      "amplitude": 22,
+      "speed": 0.1,
+      "boost": 3.0
+    },
+    {
+      "name": "wing_right",
+      "pivot": [
+        11,
+        8,
+        11
+      ],
+      "axis": "y",
+      "amplitude": -22,
+      "speed": 0.1,
+      "boost": 3.0
+    }
+  ],
+  "pastel_axolotl": [
+    {
+      "name": "gills_left",
+      "pivot": [
+        3.75,
+        3,
+        5.9
+      ],
+      "axis": "y",
+      "amplitude": 12,
+      "speed": 0.12,
+      "boost": 2.5
+    },
+    {
+      "name": "gills_right",
+      "pivot": [
+        12.25,
+        3,
+        5.9
+      ],
+      "axis": "y",
+      "amplitude": -12,
+      "speed": 0.12,
+      "boost": 2.5,
+      "phase": 1.2
+    }
+  ],
+  "baby_deer": [],
+  "honey_bee": [
+    {
+      "name": "wing_left",
+      "pivot": [
+        6,
+        8,
+        8
+      ],
+      "axis": "z",
+      "amplitude": 16,
+      "speed": 0.6,
+      "boost": 1.5
+    },
+    {
+      "name": "wing_right",
+      "pivot": [
+        10,
+        8,
+        8
+      ],
+      "axis": "z",
+      "amplitude": -16,
+      "speed": 0.6,
+      "boost": 1.5
+    }
+  ],
+  "strawberry_cow": [
+    {
+      "name": "tail",
+      "pivot": [
+        8,
+        4.25,
+        11.3
+      ],
+      "axis": "z",
+      "amplitude": 15,
+      "speed": 0.08,
+      "boost": 2.0
+    }
+  ]
+}

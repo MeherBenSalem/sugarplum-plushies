@@ -1,0 +1,61 @@
+{
+  "type": "sugarplumplushies:plushie_workshop",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "sugarplumplushies:soft_fabric"
+      },
+      "count": 6
+    },
+    {
+      "ingredient": {
+        "item": "sugarplumplushies:plush_stuffing"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "sugarplumplushies:button_eyes"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "sugarplumplushies:embroidery_thread"
+      },
+      "count": 3
+    },
+    {
+      "ingredient": {
+        "item": "sugarplumplushies:satin_ribbon"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "sugarplumplushies:sugar_star"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:phantom_membrane"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:amethyst_shard"
+      },
+      "count": 2
+    }
+  ],
+  "result": {
+    "id": "sugarplumplushies:sugarplum_dragon",
+    "components": {
+      "minecraft:block_state": {
+        "variant": "0"
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "type": "sugarplumplushies:plushie_workshop",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "sugarplumplushies:soft_fabric"
+      },
+      "count": 3
+    },
+    {
+      "ingredient": {
+        "item": "sugarplumplushies:plush_stuffing"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "sugarplumplushies:button_eyes"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:honeycomb"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:yellow_dye"
+      },
+      "count": 1
+    }
+  ],
+  "result": {
+    "id": "sugarplumplushies:honey_bee",
+    "components": {
+      "minecraft:block_state": {
+        "variant": "0"
+      }
+    }
+  }
+}

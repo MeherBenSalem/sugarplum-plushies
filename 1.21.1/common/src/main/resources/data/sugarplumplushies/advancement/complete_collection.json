@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "id": "sugarplumplushies:rainbow_collector_trophy"
+    },
+    "title": {
+      "translate": "advancements.sugarplumplushies.complete_collection.title"
+    },
+    "description": {
+      "translate": "advancements.sugarplumplushies.complete_collection.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "collected": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "parent": "sugarplumplushies:all_species"
+}

@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "id": "sugarplumplushies:sugar_star"
+    },
+    "title": {
+      "translate": "advancements.sugarplumplushies.sparkle_edition.title"
+    },
+    "description": {
+      "translate": "advancements.sugarplumplushies.sparkle_edition.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "sparkle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#sugarplumplushies:plushies",
+            "components": {
+              "minecraft:block_state": {
+                "variant": "3"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "parent": "sugarplumplushies:first_plushie"
+}

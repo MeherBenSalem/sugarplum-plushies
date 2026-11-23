@@ -1,0 +1,67 @@
+{
+  "type": "sugarplumplushies:plushie_workshop",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "sugarplumplushies:soft_fabric"
+      },
+      "count": 5
+    },
+    {
+      "ingredient": {
+        "item": "sugarplumplushies:plush_stuffing"
+      },
+      "count": 3
+    },
+    {
+      "ingredient": {
+        "item": "sugarplumplushies:button_eyes"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "sugarplumplushies:embroidery_thread"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "sugarplumplushies:satin_ribbon"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:sweet_berries"
+      },
+      "count": 3
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:leather"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:gold_nugget"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:blue_dye"
+      },
+      "count": 1
+    }
+  ],
+  "result": {
+    "id": "sugarplumplushies:strawberry_cow",
+    "components": {
+      "minecraft:block_state": {
+        "variant": "2"
+      }
+    }
+  }
+}

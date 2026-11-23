@@ -14,7 +14,7 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
-import net.minecraft.client.renderer.item.ItemProperties;
+import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -29,7 +29,7 @@ public final class SugarplumPlushiesFabricClient implements ClientModInitializer
         for (ModNetwork.Type<? extends ClientboundMessage> type : ModNetwork.CLIENTBOUND) receive(type);
 
         MenuScreens.register(ModMenus.PLUSHIE_WORKSHOP.get(), PlushieWorkshopScreen::new);
-        PlushiesClient.registerItemProperties(ItemProperties::register);
+        PlushiesClient.registerItemProperties(FabricModelPredicateProviderRegistry::register);
         PlushiesClient.registerRenderers(BlockEntityRenderers::register);
         PlushiesClient.registerParticles((type, factory) -> ParticleFactoryRegistry.getInstance().register(type, factory::create));
         List<ResourceLocation> models = new ArrayList<>();

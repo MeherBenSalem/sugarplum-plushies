@@ -1,0 +1,49 @@
+{
+  "type": "sugarplumplushies:plushie_workshop",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "sugarplumplushies:soft_fabric"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "sugarplumplushies:plush_stuffing"
+      },
+      "count": 3
+    },
+    {
+      "ingredient": {
+        "item": "sugarplumplushies:button_eyes"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "sugarplumplushies:embroidery_thread"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:bamboo"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:lime_dye"
+      },
+      "count": 1
+    }
+  ],
+  "result": {
+    "id": "sugarplumplushies:sleepy_panda",
+    "components": {
+      "minecraft:block_state": {
+        "variant": "2"
+      }
+    }
+  }
+}

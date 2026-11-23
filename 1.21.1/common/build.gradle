@@ -6,6 +6,8 @@ plugins {
 // Common code compiles against vanilla Minecraft only (no loader classes).
 neoForge {
     neoFormVersion = neo_form_version
+    // Vanilla members the common code needs (Fabric: sugarplumplushies.accesswidener).
+    accessTransformers.from(file('src/main/resources/META-INF/accesstransformer.cfg').absolutePath)
     parchment {
         minecraftVersion = parchment_minecraft
         mappingsVersion = parchment_version

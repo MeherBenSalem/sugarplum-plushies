@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "sugarplumplushies:block/golden_collector_trophy"
+    },
+    "facing=east": {
+      "model": "sugarplumplushies:block/golden_collector_trophy",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "sugarplumplushies:block/golden_collector_trophy",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "sugarplumplushies:block/golden_collector_trophy",
+      "y": 270
+    }
+  }
+}

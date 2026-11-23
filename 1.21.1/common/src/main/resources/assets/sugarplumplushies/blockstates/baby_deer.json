@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "sugarplumplushies:block/plushie/baby_deer/fawn"
+    },
+    "variant=1": {
+      "model": "sugarplumplushies:block/plushie/baby_deer/blossom"
+    },
+    "variant=2": {
+      "model": "sugarplumplushies:block/plushie/baby_deer/frost"
+    },
+    "variant=3": {
+      "model": "sugarplumplushies:block/plushie/baby_deer/sparkle"
+    }
+  }
+}

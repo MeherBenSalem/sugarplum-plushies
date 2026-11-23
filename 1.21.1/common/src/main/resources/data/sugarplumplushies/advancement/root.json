@@ -1,0 +1,50 @@
+{
+  "display": {
+    "icon": {
+      "id": "sugarplumplushies:plushie_workshop"
+    },
+    "title": {
+      "translate": "advancements.sugarplumplushies.root.title"
+    },
+    "description": {
+      "translate": "advancements.sugarplumplushies.root.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false,
+    "background": "minecraft:textures/block/pink_wool.png"
+  },
+  "criteria": {
+    "fabric": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "sugarplumplushies:soft_fabric"
+            ]
+          }
+        ]
+      }
+    },
+    "workshop": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "sugarplumplushies:plushie_workshop"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "fabric",
+      "workshop"
+    ]
+  ]
+}
