@@ -8,7 +8,7 @@ version = mod_version
 group = mod_group_id
 
 base {
-    archivesName = "${mod_id}-${minecraft_version}"
+    archivesName = "${mod_id}-forge-${minecraft_version}"
 }
 
 // Minecraft 1.20.1 ships Java 17 to players, so the mod targets Java 17.
@@ -36,6 +36,10 @@ minecraft {
 
         client {
             property 'forge.enabledGameTestNamespaces', mod_id
+            // ./gradlew runClient -Pshowcase builds a showcase world, screenshots it and quits
+            if (project.hasProperty('showcase')) {
+                property 'sugarplumplushies.showcase', 'true'
+            }
         }
 
         server {
@@ -84,6 +88,8 @@ tasks.named('jar', Jar).configure {
                 'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
+    // the showcase harness is a development tool only
+    exclude 'com/sugarplumstudios/plushies/dev/**'
     finalizedBy 'reobfJar'
 }
 
