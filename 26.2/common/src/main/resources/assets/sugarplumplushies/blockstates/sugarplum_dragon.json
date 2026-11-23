@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "sugarplumplushies:block/plushie/sugarplum_dragon/sugarplum"
+    },
+    "variant=1": {
+      "model": "sugarplumplushies:block/plushie/sugarplum_dragon/seafoam"
+    },
+    "variant=2": {
+      "model": "sugarplumplushies:block/plushie/sugarplum_dragon/rose_quartz"
+    },
+    "variant=3": {
+      "model": "sugarplumplushies:block/plushie/sugarplum_dragon/sparkle"
+    }
+  }
+}

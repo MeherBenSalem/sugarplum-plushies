@@ -1,0 +1,74 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "facing": "north"
+      },
+      "apply": {
+        "model": "sugarplumplushies:block/display_cabinet"
+      }
+    },
+    {
+      "when": {
+        "facing": "north"
+      },
+      "apply": {
+        "model": "sugarplumplushies:block/display_cabinet_glass"
+      }
+    },
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": {
+        "model": "sugarplumplushies:block/display_cabinet",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": {
+        "model": "sugarplumplushies:block/display_cabinet_glass",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": {
+        "model": "sugarplumplushies:block/display_cabinet",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": {
+        "model": "sugarplumplushies:block/display_cabinet_glass",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": {
+        "model": "sugarplumplushies:block/display_cabinet",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": {
+        "model": "sugarplumplushies:block/display_cabinet_glass",
+        "y": 270
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:book",
+    "sugarplumplushies:soft_fabric",
+    "sugarplumplushies:satin_ribbon"
+  ],
+  "result": {
+    "count": 1,
+    "id": "sugarplumplushies:plushie_collection_book"
+  }
+}

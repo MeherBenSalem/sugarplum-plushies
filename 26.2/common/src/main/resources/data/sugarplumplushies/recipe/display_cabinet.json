@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PGP",
+    "GSG",
+    "PGP"
+  ],
+  "key": {
+    "P": "#minecraft:planks",
+    "G": "minecraft:glass_pane",
+    "S": "sugarplumplushies:plushie_shelf"
+  },
+  "result": {
+    "count": 1,
+    "id": "sugarplumplushies:display_cabinet"
+  }
+}

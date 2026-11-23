@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "sugarplumplushies:block/plushie/heart_bear/rose"
+    },
+    "variant=1": {
+      "model": "sugarplumplushies:block/plushie/heart_bear/ruby"
+    },
+    "variant=2": {
+      "model": "sugarplumplushies:block/plushie/heart_bear/lilac"
+    },
+    "variant=3": {
+      "model": "sugarplumplushies:block/plushie/heart_bear/sparkle"
+    }
+  }
+}

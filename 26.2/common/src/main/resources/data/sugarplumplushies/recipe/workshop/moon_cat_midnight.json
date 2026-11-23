@@ -1,0 +1,41 @@
+{
+  "type": "sugarplumplushies:plushie_workshop",
+  "ingredients": [
+    {
+      "ingredient": "sugarplumplushies:soft_fabric",
+      "count": 5
+    },
+    {
+      "ingredient": "sugarplumplushies:plush_stuffing",
+      "count": 3
+    },
+    {
+      "ingredient": "sugarplumplushies:button_eyes",
+      "count": 1
+    },
+    {
+      "ingredient": "sugarplumplushies:embroidery_thread",
+      "count": 2
+    },
+    {
+      "ingredient": "sugarplumplushies:satin_ribbon",
+      "count": 1
+    },
+    {
+      "ingredient": "minecraft:glowstone_dust",
+      "count": 2
+    },
+    {
+      "ingredient": "minecraft:lapis_lazuli",
+      "count": 2
+    }
+  ],
+  "result": {
+    "id": "sugarplumplushies:moon_cat",
+    "components": {
+      "minecraft:block_state": {
+        "variant": "0"
+      }
+    }
+  }
+}

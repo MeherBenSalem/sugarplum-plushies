@@ -1,0 +1,37 @@
+{
+  "type": "sugarplumplushies:plushie_workshop",
+  "ingredients": [
+    {
+      "ingredient": "sugarplumplushies:soft_fabric",
+      "count": 3
+    },
+    {
+      "ingredient": "sugarplumplushies:plush_stuffing",
+      "count": 2
+    },
+    {
+      "ingredient": "sugarplumplushies:button_eyes",
+      "count": 1
+    },
+    {
+      "ingredient": "minecraft:feather",
+      "count": 2
+    },
+    {
+      "ingredient": "minecraft:yellow_dye",
+      "count": 1
+    },
+    {
+      "ingredient": "minecraft:white_dye",
+      "count": 1
+    }
+  ],
+  "result": {
+    "id": "sugarplumplushies:little_duck",
+    "components": {
+      "minecraft:block_state": {
+        "variant": "1"
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "sugarplumplushies:block/display_stand"
+    },
+    "facing=east": {
+      "model": "sugarplumplushies:block/display_stand",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "sugarplumplushies:block/display_stand",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "sugarplumplushies:block/display_stand",
+      "y": 270
+    }
+  }
+}

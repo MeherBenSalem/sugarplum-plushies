@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "sugarplumplushies:block/sky_plushie_bed"
+    },
+    "facing=east": {
+      "model": "sugarplumplushies:block/sky_plushie_bed",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "sugarplumplushies:block/sky_plushie_bed",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "sugarplumplushies:block/sky_plushie_bed",
+      "y": 270
+    }
+  }
+}

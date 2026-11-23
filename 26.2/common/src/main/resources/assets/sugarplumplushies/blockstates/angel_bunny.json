@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "variant=0": {
+      "model": "sugarplumplushies:block/plushie/angel_bunny/seraph"
+    },
+    "variant=1": {
+      "model": "sugarplumplushies:block/plushie/angel_bunny/blush"
+    },
+    "variant=2": {
+      "model": "sugarplumplushies:block/plushie/angel_bunny/sky"
+    },
+    "variant=3": {
+      "model": "sugarplumplushies:block/plushie/angel_bunny/sparkle"
+    }
+  }
+}

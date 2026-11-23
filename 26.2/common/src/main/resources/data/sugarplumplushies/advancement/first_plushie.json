@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "id": "sugarplumplushies:pink_teddy_bear"
+    },
+    "title": {
+      "translate": "advancements.sugarplumplushies.first_plushie.title"
+    },
+    "description": {
+      "translate": "advancements.sugarplumplushies.first_plushie.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "plushie": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#sugarplumplushies:plushies"
+          }
+        ]
+      }
+    }
+  },
+  "parent": "sugarplumplushies:root"
+}
