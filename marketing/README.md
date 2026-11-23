@@ -7,9 +7,9 @@ Listing copy and artwork for CurseForge and Modrinth. Nothing here ships in the 
 | File | Use |
 | --- | --- |
 | [`curseforge/description.md`](curseforge/description.md) | Full CurseForge project description (Markdown) |
-| [`curseforge/summary.txt`](curseforge/summary.txt) | Short CurseForge project summary |
+| [`curseforge/summary.txt`](curseforge/summary.txt) | Short CurseForge project summary (220 characters) |
 | [`modrinth/description.md`](modrinth/description.md) | Full Modrinth project body. The same copy as CurseForge, but the screenshots go in the project's Gallery tab instead of the page |
-| [`modrinth/summary.txt`](modrinth/summary.txt) | Modrinth summary (Modrinth allows 256 characters) |
+| [`modrinth/summary.txt`](modrinth/summary.txt) | Modrinth summary (220 characters; Modrinth allows 256) |
 | `images/icon.png` | Project avatar on both sites |
 
 Image links in both descriptions point at `raw.githubusercontent.com/MeherBenSalem/sugarplum-plushies/main/marketing/images/...`. **They only work for visitors once this folder is on `main` and the repository is public.** While the repository is private, upload the images to each site instead (the CurseForge description editor and the Modrinth gallery both take uploads) and replace each URL.
@@ -34,7 +34,22 @@ No other copy or artwork names a Minecraft version. A new release number goes in
 
 ## Images
 
-IMAGES_TABLE
+| File | Size | Use |
+| --- | --- | --- |
+| `images/banner.png` | 1800×600, 951 KB | Description header: the plushie bedroom, the title, "Craft, collect, display and cuddle.", the loader pill and version line |
+| `images/icon.png` | 512×512, 145 KB | Project avatar: the Pink Teddy Bear in a polka-dot ring |
+| `images/card-plushies.png` | 1600×900, 735 KB | All 15 plushies with their rarities; 15 plushies, 60 variants, 4 rarities, 29 blocks |
+| `images/card-variants.png` | 1600×900, 693 KB | The dragon, fox, Heart Bear and Honey Bee in all four variants |
+| `images/card-cuddle.png` | 1600×900, 899 KB | The cuddle capture, plus five plushies with their cuddle animations |
+| `images/card-furniture.png` | 1600×900, 1306 KB | The whole bedroom, plus the shelf, stand, cabinet, bed, gift box and trophy |
+| `images/card-workshop.png` | 1600×900, 797 KB | The Plushie Workshop with the Angel Bunny pattern picked |
+| `images/card-book.png` | 1600×900, 876 KB | The Collection Book at the Sugarplum Dragon and its Rewards tab |
+| `images/card-names.png` | 1600×900, 957 KB | Mochi, Biscuit and Princess Puff with their name plates |
+| `images/card-glow.png` | 1600×900, 903 KB | The glowing plushies and trophies at dusk, with their light levels |
+| `images/card-config.png` | 1600×900, 557 KB | Excerpts of `sugarplumplushies-common.toml` and `sugarplumplushies-client.toml` |
+| `images/header-*.png` | 1400×120, transparent, 33–58 KB | 14 section headings for the descriptions |
+| `images/divider.png` | 1400×40, transparent | Section divider |
+| `images/screenshots/*.jpg` | 1920×1080, 153–464 KB | 11 captures: gallery uploads and card art |
 
 ### Where the pictures come from
 
