@@ -80,12 +80,12 @@ public class WorkshopRecipe implements Recipe<RecipeInput> {
 
     private final List<CountedIngredient> ingredients;
     private final ItemStackTemplate template;
-    private final ItemStack result;
+    // Made on first use: item components are not bound yet while recipes load.
+    private ItemStack result;
 
     public WorkshopRecipe(List<CountedIngredient> ingredients, ItemStackTemplate template) {
         this.ingredients = List.copyOf(ingredients);
         this.template = template;
-        this.result = template.create();
     }
 
     /** The client's copy of the workshop recipes, sent by the server when a workshop opens. */
@@ -108,6 +108,9 @@ public class WorkshopRecipe implements Recipe<RecipeInput> {
     }
 
     public ItemStack getResult() {
+        if (result == null) {
+            result = template.create();
+        }
         return result;
     }
 
@@ -132,8 +135,8 @@ public class WorkshopRecipe implements Recipe<RecipeInput> {
     }
 
     private int sortKey() {
-        if (result.getItem() instanceof PlushieItem plushie) {
-            return plushie.getSpecies().ordinal() * PlushieSpecies.VARIANT_COUNT + PlushieItem.getVariant(result);
+        if (getResult().getItem() instanceof PlushieItem plushie) {
+            return plushie.getSpecies().ordinal() * PlushieSpecies.VARIANT_COUNT + PlushieItem.getVariant(getResult());
         }
         return 100_000;
     }
@@ -197,7 +200,7 @@ public class WorkshopRecipe implements Recipe<RecipeInput> {
         if (container instanceof Inventory && slot >= Inventory.INVENTORY_SIZE && slot < Inventory.INVENTORY_SIZE + 4) {
             return false; // never take worn armour
         }
-        if (ItemStack.isSameItemSameComponents(stack, result)) {
+        if (ItemStack.isSameItemSameComponents(stack, getResult())) {
             return false; // a Sparkle upgrade never eats another Sparkle of the same plushie
         }
         if (!allowTreasured && stack.getItem() instanceof PlushieItem) {
@@ -213,7 +216,7 @@ public class WorkshopRecipe implements Recipe<RecipeInput> {
 
     @Override
     public ItemStack assemble(RecipeInput input) {
-        return result.copy();
+        return getResult().copy();
     }
 
     @Override

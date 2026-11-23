@@ -51,6 +51,9 @@ SPARKLE_COST = [(STAR, 1), (THREAD, 2), ("minecraft:gold_nugget", 4)]
 
 
 def ing(item):
+    """An ingredient; a list of items/tags means any of them."""
+    if isinstance(item, list):
+        return [ing(i) for i in item]
     return {"tag": item[1:]} if item.startswith("#") else {"item": item}
 
 
@@ -92,7 +95,7 @@ def recipes(variant_ids):
     out["soft_fabric"] = shapeless(["#minecraft:wool", "#minecraft:wool", "minecraft:string"], FABRIC, 3)
     out["plush_stuffing"] = shapeless(["#minecraft:wool", "minecraft:feather"], STUFF, 4)
     out["button_eyes"] = shapeless(["minecraft:black_dye", "#minecraft:buttons"], EYES, 4)
-    out["embroidery_thread"] = shapeless(["minecraft:string", "#forge:dyes"], THREAD, 2)
+    out["embroidery_thread"] = shapeless(["minecraft:string", ["#forge:dyes", "#c:dyes"]], THREAD, 2)  # Forge and Fabric dye tags
     out["satin_ribbon"] = shaped(["SPS"], {"S": "minecraft:string", "P": "minecraft:pink_dye"}, RIBBON, 3)
     out["sugar_star"] = shaped([" A ", "GSG", " A "], {"A": "minecraft:amethyst_shard", "G": "minecraft:glowstone_dust",
                                                        "S": "minecraft:sugar"}, STAR, 1)

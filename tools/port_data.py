@@ -64,7 +64,20 @@ def variant_components(nbt):
     return {"minecraft:block_state": {"variant": match.group(1)}}
 
 
+def drop_forge_tags(ing):
+    """1.21+: the c: tags are shared by every loader, so 1.20.1's forge: alternatives go."""
+    if isinstance(ing, list):
+        kept = [i for i in ing if not (isinstance(i, dict) and i.get("tag", "").startswith("forge:"))]
+        return kept[0] if len(kept) == 1 else kept
+    return ing
+
+
 def recipe(obj, version):
+    if "ingredients" in obj:
+        obj["ingredients"] = [dict(i, ingredient=drop_forge_tags(i["ingredient"])) if isinstance(i, dict) and "ingredient" in i
+                              else drop_forge_tags(i) for i in obj["ingredients"]]
+    if "key" in obj:
+        obj["key"] = {k: drop_forge_tags(v) for k, v in obj["key"].items()}
     if "result" in obj and isinstance(obj["result"], dict) and "item" in obj["result"]:
         obj["result"]["id"] = obj["result"].pop("item")
         if "nbt" in obj["result"]:

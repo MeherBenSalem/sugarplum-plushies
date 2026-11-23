@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     "minecraft:string",
-    "#forge:dyes"
+    "#c:dyes"
   ],
   "result": {
     "count": 2,

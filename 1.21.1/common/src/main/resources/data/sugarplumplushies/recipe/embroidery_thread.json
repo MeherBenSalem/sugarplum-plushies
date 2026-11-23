@@ -6,7 +6,7 @@
       "item": "minecraft:string"
     },
     {
-      "tag": "forge:dyes"
+      "tag": "c:dyes"
     }
   ],
   "result": {

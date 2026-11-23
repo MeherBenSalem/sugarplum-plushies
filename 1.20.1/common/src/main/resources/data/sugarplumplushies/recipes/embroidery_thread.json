@@ -5,9 +5,14 @@
     {
       "item": "minecraft:string"
     },
-    {
-      "tag": "forge:dyes"
-    }
+    [
+      {
+        "tag": "forge:dyes"
+      },
+      {
+        "tag": "c:dyes"
+      }
+    ]
   ],
   "result": {
     "item": "sugarplumplushies:embroidery_thread",
