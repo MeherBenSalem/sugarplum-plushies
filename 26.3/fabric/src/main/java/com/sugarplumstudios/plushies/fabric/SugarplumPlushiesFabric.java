@@ -22,10 +22,10 @@ public final class SugarplumPlushiesFabric implements ModInitializer {
     public void onInitialize() {
         SugarplumPlushies.init();
         for (ModNetwork.Type<?> type : ModNetwork.CLIENTBOUND) {
-            PayloadTypeRegistry.playS2C().register(MessagePayload.typeFor(type), MessagePayload.codec(type));
+            PayloadTypeRegistry.clientboundPlay().register(MessagePayload.typeFor(type), MessagePayload.codec(type));
         }
         for (ModNetwork.Type<?> type : ModNetwork.SERVERBOUND) {
-            PayloadTypeRegistry.playC2S().register(MessagePayload.typeFor(type), MessagePayload.codec(type));
+            PayloadTypeRegistry.serverboundPlay().register(MessagePayload.typeFor(type), MessagePayload.codec(type));
             // Fabric calls payload receivers on the server thread.
             ServerPlayNetworking.registerGlobalReceiver(MessagePayload.typeFor(type),
                     (payload, context) -> ((ServerboundMessage) payload.message()).handleOnServer(context.player()));
